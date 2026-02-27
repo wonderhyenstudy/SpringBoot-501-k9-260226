@@ -12,5 +12,16 @@
 <div th:text="${sampleDTO}"></div>
 
 <h2>자바스크립트 출력용</h2>
+<script th:inline="javascript">
+    const strList = [[${strList}]]
+    const map = [[${map}]]
+    const sampleDTO = [[${sampleDTO}]]
+
+    console.log("strList 리스트" ,strList)
+    console.log("map 맵" ,map)
+    console.log("sampleDTO " ,sampleDTO)
+
+</script>
+
 </body>
 </html>
