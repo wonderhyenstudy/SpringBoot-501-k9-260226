@@ -17,5 +17,17 @@
 <div th:with="num1 = ${10}, num2 = ${20}">
     <h4 th:text="${num1 + num2}"></h4>
 </div>
+
+<h3>타임리프의 반복문 2가지 방법 확인. 1 </h3>
+<ul>
+    <li th:each="str : ${strList}" th:text="${str}"></li>
+</ul>
+
+<h3>타임리프의 반복문 2가지 방법 확인.2 </h3>
+<ul>
+    <th:block th:each="str : ${strList}">
+        <li></li>
+    </th:block>
+</ul>
 </body>
 </html>
