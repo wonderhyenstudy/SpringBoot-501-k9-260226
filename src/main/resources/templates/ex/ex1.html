@@ -29,5 +29,14 @@
         <li>[[${str}]]</li>
     </th:block>
 </ul>
+
+<h3>반복문에 status 변수 를 이용해보기.</h3>
+<ul>
+    <li th:each="str,status : ${strList}" ></li>
+    status 의 index 속성 : [[${status.index}]] --
+    status 의 even 속성 : [[${status.even}]] --
+    status 의 odd 속성 : [[${status.odd}]]
+    : [[${str}]]
+</ul>
 </body>
 </html>
