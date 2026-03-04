@@ -27,4 +27,12 @@ public class BoardServiceTests {
        log.info("등록된 bno 확인 : " + bno);
     }
 
+    @Test
+    public void testSelectOne() {
+       Long bno = 102L;
+       BoardDTO boardDTO = boardService.readOne(bno);
+       log.info("하나조회 결과 boardDTO : " + boardDTO);
+
+    }
+
 }
