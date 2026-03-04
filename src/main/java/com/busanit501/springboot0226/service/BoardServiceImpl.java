@@ -2,14 +2,20 @@ package com.busanit501.springboot0226.service;
 
 import com.busanit501.springboot0226.domain.Board;
 import com.busanit501.springboot0226.dto.BoardDTO;
+import com.busanit501.springboot0226.dto.PageRequestDTO;
+import com.busanit501.springboot0226.dto.PageResponseDTO;
 import com.busanit501.springboot0226.repository.BoardRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Log4j2
@@ -50,5 +56,28 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public void remove(Long bno) {
         boardRepository.deleteById(bno);
+    }
+
+    @Override
+    public PageResponseDTO<BoardDTO> list(PageRequestDTO pageRequestDTO) {
+        String[] types = pageRequestDTO.getTypes();
+        String keyword = pageRequestDTO.getKeyword();
+        Pageable pageable = pageRequestDTO.getPageable("bno");
+        // result 안에 페이징 준비물이 많이 들어 있다.
+        Page<Board> result = boardRepository.searchAll(types, keyword, pageable);
+        // 페이징 처리가 된 데이터 10개 목록 가져오고,
+        List<BoardDTO> dtoList = result.getContent().stream()
+                .map(board -> modelMapper.map(board, BoardDTO.class))
+                .collect(Collectors.toList());
+        // 전체 갯수등 가져오기.
+        int total = (int)result.getTotalElements();
+        // PageResponseDTO 타입으로 객체를 생성.
+        PageResponseDTO<BoardDTO> pageResponseDTO = PageResponseDTO.<BoardDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(total)
+                .build();
+
+        return pageResponseDTO;
     }
 }
