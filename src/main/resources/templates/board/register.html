@@ -39,7 +39,16 @@
     </div>
 </div>
 <script layout:fragment="script" th:inline="javascript">
+    const errors = [[${errors}]]
+    console.log("서버로부터 받은 유효성 체크 오류 : ", errors)
 
+    let errorMsg = ''
+    if(errors) {
+        for ( let i = 0; i < errors.length; i++) {
+            errorMsg += `${errors[i].field}는 : ${errors[i].code}} \n`
+        }
+        alert(errorMsg)
+    }
 </script>
 </body>
 </html>
