@@ -16,9 +16,9 @@
                 <div class="card-body">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Bno:</span>
-                        <input class="form-control" type="text" name="title"
+                        <input class="form-control" type="text" name="bno"
                                th:value="${dto.bno}"
-                               placeholder="board 제목을 입력해주세요" readonly>
+                                readonly>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text">Title:</span>
@@ -28,8 +28,9 @@
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text">Content:</span>
-                        <textarea class="form-control col-sm-5" rows="5" name="content" readonly>
-                            [[${dto.content}]]
+                        <textarea class="form-control col-sm-5" rows="5" name="content"
+                                  th:text="${dto.content}"
+                                  readonly>
                         </textarea>
                     </div>
                     <div class="input-group mb-3">
