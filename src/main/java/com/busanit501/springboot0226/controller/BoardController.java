@@ -55,4 +55,11 @@ public class BoardController {
 
     }
 
+    @GetMapping("/read")
+    public  void read(Long bno, PageRequestDTO pageRequestDTO, Model model) {
+        BoardDTO boardDTO = boardService.readOne(bno);
+        log.info("BoardController 에서, read , boardDTO 확인 : " +boardDTO );
+        model.addAttribute("dto",boardDTO);
+    }
+
 }
