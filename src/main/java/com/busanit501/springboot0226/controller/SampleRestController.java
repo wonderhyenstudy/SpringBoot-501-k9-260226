@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Log4j2
+//http://localhost:8080/helloRest
 public class SampleRestController {
     @GetMapping("/helloRest")
     public String[] helloRest(){
